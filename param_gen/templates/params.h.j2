@@ -1,0 +1,47 @@
+{% macro type_map(type) %}
+{%- if type.lower()=="uint8" -%}
+uint8_t
+{%- elif type.lower()=="int8" -%}
+int8_t
+{%- elif type.lower()=="uint16" -%}
+uint16_t
+{%- elif type.lower()=="int16" -%}
+int16_t
+{%- elif type.lower()=="uint32" -%}
+uint32_t
+{%- elif type.lower()=="int32" -%}
+int32_t
+{%- elif type.lower()=="uint64" -%}
+uint64_t
+{%- elif type.lower()=="int64" -%}
+int64_t
+{%- elif type.lower()=="float" -%}
+float
+{%- elif type.lower()=="double" -%}
+double
+{%- elif type.lower()=="bool" -%}
+bool
+{%- elif type.lower()=="char" -%}
+char
+{%- else -%}
+umsg_{{topic_dict.name}}_{{type.lower()}}_t
+{%- endif%}
+{% endmacro %}
+// Generated with param_loader on {{ date }}
+#pragma once
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+#include <stdint.h>
+#include <stddef.h>
+#include <stdbool.h>
+
+{% for param in param_dict.params %}
+extern {{type_map(param.type)}} PARAM_{{param.name.upper()}}; // {{param.comment}}
+{% endfor %}
+
+#ifdef __cplusplus
+}
+#endif
+

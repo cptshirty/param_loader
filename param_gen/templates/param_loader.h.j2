@@ -1,0 +1,46 @@
+{% macro type_map(type) %}
+{%- if type.lower()=="uint8" -%}
+uint8_t
+{%- elif type.lower()=="int8" -%}
+int8_t
+{%- elif type.lower()=="uint16" -%}
+uint16_t
+{%- elif type.lower()=="int16" -%}
+int16_t
+{%- elif type.lower()=="uint32" -%}
+uint32_t
+{%- elif type.lower()=="int32" -%}
+int32_t
+{%- elif type.lower()=="uint64" -%}
+uint64_t
+{%- elif type.lower()=="int64" -%}
+int64_t
+{%- elif type.lower()=="float" -%}
+float
+{%- elif type.lower()=="double" -%}
+double
+{%- elif type.lower()=="bool" -%}
+bool
+{%- elif type.lower()=="char" -%}
+char
+{%- endif%}
+{% endmacro %}
+// Generated with param_loader on {{ date }}
+#pragma once
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <params.h>
+#include <string.h>
+
+uint8_t load_param(char *buffer); // this function is used to assign string to a parameter and then write its value to the parameter
+
+
+
+#ifdef __cplusplus
+}
+#endif
+
+

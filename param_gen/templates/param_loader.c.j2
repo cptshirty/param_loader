@@ -1,0 +1,58 @@
+{% macro convert(type) %}
+{%- if type.lower()=="uint8" -%}
+atoi(val)
+{%- elif type.lower()=="int8" -%}
+atoi(val)
+{%- elif type.lower()=="uint16" -%}
+atoi(val)
+{%- elif type.lower()=="int16" -%}
+atoi(val)
+{%- elif type.lower()=="uint32" -%}
+atoi(val)
+{%- elif type.lower()=="int32" -%}
+atoi(val)
+{%- elif type.lower()=="uint64" -%}
+atoi(val)
+{%- elif type.lower()=="int64" -%}
+atoi(val)
+{%- elif type.lower()=="float" -%}
+atof(val)
+{%- elif type.lower()=="double" -%}
+atof(val)
+{%- elif type.lower()=="bool" -%}
+atoi(val)
+{%- elif type.lower()=="char" -%}
+val
+{%- else -%}
+{%- endif%}
+{% endmacro %}
+
+// Generated with praram_loader on {{ date }}
+
+
+#include "param_loader.h"
+
+
+// this function is used to assign string to a parameter and then write its value to the parameter
+
+uint8_t load_param(char *buffer)
+{
+    uint8_t retval = 0;
+    char* var = 0;    
+    char* val = 0;    
+    var = strtok(buffer," "); // get the param name
+    val = strtok(NULL," "); // get the value of the param
+    {%for param in param_dict.params%}
+    {% if loop.first%}if(strcmp(var,"{{param.name.upper()}}")==0){%elif loop.last %}else{% else %}else if(strcmp(var,"{{param.name.upper()}}")==0){% endif %}
+    {
+    {% if loop.last%}
+    {% else %}
+    retval = 1;
+    PARAM_{{param.name.upper()}} = {{convert(param.type)}};
+    {% endif %}
+    
+    }
+    {% endfor %}
+    return retval;
+}
+

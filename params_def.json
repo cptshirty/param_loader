@@ -1,0 +1,22 @@
+{
+    "params":[
+        {
+            "name" : "blink_delay",
+            "type" : "uint32",
+            "def_val": 100,
+            "comment": "this is a delay between blinks of led"
+        },
+        {
+            "name" : "buzzer_tone",
+            "type" : "uint32",
+            "def_val": 2500,
+            "comment": "this is a frequency of the buzzer"
+        },
+        {
+            "name" : "buzzer_delay",
+            "type" : "uint32",
+            "def_val": 250,
+            "comment": "this is a beep duration for the buzzer"
+        }
+    ]
+}

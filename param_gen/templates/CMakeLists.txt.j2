@@ -1,0 +1,11 @@
+# create library
+add_library(param_loader_lib STATIC
+    src/params.c
+    src/param_loader.c
+    )
+
+# add includes
+target_include_directories(param_loader_lib PUBLIC inc)
+target_link_options(param_loader_lib PRIVATE -ffunction-sections -fdata-sections)
+# linker options to allow dead code elimination
+target_link_options(param_loader_lib PRIVATE -Wl,--gc-sections)
